@@ -1,7 +1,5 @@
 # Linux SSH Service Verification Lab
 
-Completed on 5 September 2026.
-
 ## Overview
 
 A small Linux and networking self-study lab using two virtual machines (VMs) in VirtualBox. I used Kali to check the network connection and scan Ubuntu. I then installed an SSH server on Ubuntu, checked that port 22 was open, and stopped and disabled SSH when I no longer needed it. Finally, I scanned Ubuntu again to check the change.
