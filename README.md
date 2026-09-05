@@ -33,9 +33,10 @@ Both VMs used the same VirtualBox Host-Only Adapter for Adapter 2. Tools used we
                      |              |
                      +--------------+
                     Shared host-only network
+                        192.168.56.0/24
 ```
 
-The addresses shown belong to Adapter 2. Adapter 1 provided each VM with its own NAT connection; traffic between the lab VMs used the shared host-only network. The subnet mask was not recorded here.
+The addresses shown belong to Adapter 2. Adapter 1 was retained for internet access through NAT; traffic between the lab VMs used the shared host-only network. Both host-only addresses were shown with a `/24` prefix in the lab screenshots.
 
 ## Steps performed
 

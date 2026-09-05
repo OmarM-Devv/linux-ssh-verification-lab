@@ -2,6 +2,12 @@
 
 No screenshots are currently included. Screenshots are optional, but genuine captures from this lab would help show the observed change.
 
+## Available original evidence
+
+The original lab record contains screenshots of the VM addresses, successful ping, initial Nmap scan, OpenSSH installation and running SSH service. The most useful existing captures to add are the ping result, initial scan and running-service status, after reviewing and redacting identifying details.
+
+The scan with SSH open and the final verification were confirmed in messages but have no attached screenshots in that record. The suggestions below do not imply those captures already exist.
+
 ## Recommended evidence
 
 If available, prioritise these three captures:
