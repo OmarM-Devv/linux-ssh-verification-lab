@@ -4,11 +4,11 @@ Completed on 5 September 2026.
 
 ## Overview
 
-A small Linux/networking self-study lab using two VirtualBox VMs: Kali as the scanning machine and Ubuntu as the target. I checked connectivity, observed the effect of installing an SSH server, then stopped and disabled the service and checked the result from Kali.
+A small Linux and networking self-study lab using two virtual machines (VMs) in VirtualBox. I used Kali to check the network connection and scan Ubuntu. I then installed an SSH server on Ubuntu, checked that port 22 was open, and stopped and disabled SSH when I no longer needed it. Finally, I scanned Ubuntu again to check the change.
 
 ## Objective
 
-Practise Linux service management and use a second machine to verify how a service change affects the ports visible over the network.
+Learn how to connect two Linux VMs, manage a service, and check the result from another machine.
 
 ## Lab environment
 
@@ -36,16 +36,16 @@ Both VMs used the same VirtualBox Host-Only Adapter for Adapter 2. Tools used we
                         192.168.56.0/24
 ```
 
-The addresses shown belong to Adapter 2. Adapter 1 was retained for internet access through NAT; traffic between the lab VMs used the shared host-only network. Both host-only addresses were shown with a `/24` prefix in the lab screenshots.
+Each VM kept Adapter 1 set to NAT for internet access. Adapter 2 connected the VMs to the same host-only network so they could communicate with each other. The IP addresses shown above belong to Adapter 2.
 
 ## Steps performed
 
-1. Created/used Kali and Ubuntu VMs in VirtualBox and checked their addresses with `ip a`. Initially, both used NAT and showed `10.0.2.15`; these separate NAT connections did not provide the shared lab network needed for direct communication.
+1. Used Kali and Ubuntu VMs in VirtualBox and checked their IP addresses with `ip a`. Both initially showed `10.0.2.15`, but each VM had its own NAT connection. They needed a shared network to communicate with each other.
 2. Kept Adapter 1 as NAT for internet access and added Adapter 2 using the same Host-Only Adapter on both VMs. Ubuntu had `192.168.56.101` and Kali had `192.168.56.102`.
 3. From Kali, ran `ping -c 4 192.168.56.101`. All four packets were received, with 0% packet loss.
 4. Ran `nmap -sV 192.168.56.101` from Kali. The host was up, but all 1,000 default TCP ports scanned were closed.
 5. On Ubuntu, ran `systemctl status ssh --no-pager`. It reported `Unit ssh.service could not be found.`
-6. Ran `sudo apt update` and `sudo apt install openssh-server -y` on Ubuntu. A subsequent service status check showed `Active: active (running)` and that the server was listening on port 22.
+6. Ran `sudo apt update` and `sudo apt install openssh-server -y` on Ubuntu. I checked the service again: it showed `Active: active (running)` and was listening on port 22.
 7. Repeated the Nmap scan from Kali. TCP port 22 was open and identified as SSH/OpenSSH.
 8. Because SSH was no longer required for the lab, ran `sudo systemctl stop ssh` and `sudo systemctl disable ssh` on Ubuntu. Checked the service status again and confirmed it was no longer running.
 9. Repeated the same Nmap scan from Kali. The final scan confirmed that port 22 was no longer open.
@@ -59,7 +59,7 @@ ping -c 4 192.168.56.101
 nmap -sV 192.168.56.101
 ```
 
-On Ubuntu, to inspect and install the service:
+On Ubuntu, to check and install SSH:
 
 ```bash
 systemctl status ssh --no-pager
@@ -68,7 +68,7 @@ sudo apt install openssh-server -y
 systemctl status ssh --no-pager
 ```
 
-On Ubuntu, after verifying SSH from Kali:
+On Ubuntu, after the scan showed SSH was open:
 
 ```bash
 sudo systemctl stop ssh
@@ -80,7 +80,7 @@ See [the command notes](notes/commands.md) for all commands used and their expla
 
 ## Results
 
-These are summaries of my recorded observations, not full terminal transcripts.
+This table summarises what I recorded during the lab.
 
 | Check | Observed result |
 | --- | --- |
@@ -93,16 +93,16 @@ These are summaries of my recorded observations, not full terminal transcripts.
 
 ## What I learned
 
-- Separate NAT connections and a shared host-only network serve different purposes. Adding the host-only adapters gave the VMs a network for direct lab communication while keeping NAT for internet access.
+- NAT gave each VM internet access. The shared host-only network let the VMs communicate with each other.
 - An open port is not automatically a vulnerability. I need to understand which service is using it and whether that service is required.
-- Stopping a service and disabling it are separate actions: stopping affects its current execution, while disabling removes its configured automatic startup through systemd enablement.
-- Checking service status locally and scanning from another machine gave me two ways to verify the change.
+- Stopping a service stops it now. Disabling it removes its normal automatic startup setting; disabling alone does not stop a running service.
+- Checking SSH on Ubuntu and scanning from Kali gave me two ways to check the change.
 
-The main lesson was to make a controlled change and independently verify the result from another machine.
+My main lesson was to make a controlled change, then check from another machine that it had worked.
 
 ## Screenshots
 
-These are cropped copies of original screenshots from the lab completed on 5 September 2026. Cropping excludes identifying details and unrelated terminal content; the visible command output has not been rewritten.
+These screenshots are from the lab completed on 5 September 2026. I cropped out identifying details and unrelated content. The command output shown is unchanged.
 
 ### Connectivity from Kali
 
@@ -120,14 +120,14 @@ Before installing the SSH server, all 1,000 default TCP ports scanned were close
 
 ![Ubuntu SSH service status showing active and running](screenshots/03-ssh-service-running.png)
 
-After installation, the local status check showed the SSH service was active and running. This capture documents service status; the later Nmap checks were confirmed in my messages without attached screenshots.
+This shows SSH running on Ubuntu after installation. I recorded the later Nmap results in messages, but did not attach screenshots of those scans.
 
-See [the screenshot notes](screenshots/README.md) for provenance and evidence limits.
+See [the screenshot notes](screenshots/README.md) for where the images came from and what they show.
 
 ## Limitations / scope
 
-- This was a Linux/networking self-study lab focused on connectivity, service management, scanning and verification. It was not penetration testing or a cybersecurity vulnerability assessment, and no exploitation was performed.
-- Scans targeted only the Ubuntu VM's host-only address. The default scan covered 1,000 TCP ports, not every TCP port or UDP ports.
-- Service detection identified SSH/OpenSSH; no exact version is recorded here, and no vulnerability conclusion is drawn from that identification.
-- The final scan established that port 22 was no longer open at that time. No reboot verification or SSH login test is documented.
-- Three original screenshot crops are included. No standalone raw scan logs, screenshot of the later open-port scan, or screenshot of the final scan are available in the original lab record; those later results are based on my recorded confirmations.
+- This was a Linux and networking self-study lab. It was not penetration testing or a vulnerability assessment. I did not exploit anything.
+- I scanned only Ubuntu's host-only IP address. The scan checked the default 1,000 TCP ports, not all TCP ports or UDP ports.
+- Nmap identified SSH/OpenSSH. I have not included an exact version or treated the open SSH port as a vulnerability.
+- The final scan showed port 22 was no longer open at that time. I did not document a reboot check or an SSH login test.
+- Three screenshots are included. The later open-port scan and final scan are supported by my recorded confirmations, without screenshots or separate raw scan logs.
