@@ -120,12 +120,8 @@ Before installing the SSH server, all 1,000 default TCP ports scanned were close
 
 This shows SSH running on Ubuntu after installation. I recorded the later Nmap results in messages, but did not attach screenshots of those scans.
 
-See [the screenshot notes](screenshots/README.md) for where the images came from and what they show.
-
 ## Limitations / scope
 
 - This was a Linux and networking self-study lab. It was not penetration testing or a vulnerability assessment. I did not exploit anything.
 - I scanned only Ubuntu's host-only IP address. The scan checked the default 1,000 TCP ports, not all TCP ports or UDP ports.
 - Nmap identified SSH/OpenSSH. I have not included an exact version or treated the open SSH port as a vulnerability.
-- The final scan showed port 22 was no longer open at that time. I did not document a reboot check or an SSH login test.
-- Three screenshots are included. The later open-port scan and final scan are supported by my recorded confirmations, without screenshots or separate raw scan logs.
