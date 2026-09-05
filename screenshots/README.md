@@ -1,23 +1,17 @@
-# Screenshots
+# Screenshot evidence
 
-No screenshots are currently included. Screenshots are optional, but genuine captures from this lab would help show the observed change.
+These three images are cropped copies of genuine screenshots attached to the original lab record, "02 Linux Lab", for the lab completed on 5 September 2026. They were prepared for this repository on 6 September 2026. The original chat attachments were not modified.
 
-## Available original evidence
+| File | What it shows | Cropping |
+| --- | --- | --- |
+| [01-connectivity-ping.png](01-connectivity-ping.png) | Kali's `ping -c 4 192.168.56.101`, four replies and 0% packet loss | Excludes the desktop, identifying prompt and unrelated interface output. |
+| [02-initial-nmap-scan.png](02-initial-nmap-scan.png) | The initial `nmap -sV 192.168.56.101` scan: host up and all 1,000 scanned TCP ports closed | Excludes the window title, identifying prompts, unrelated commands and MAC address line. |
+| [03-ssh-service-running.png](03-ssh-service-running.png) | Ubuntu's SSH service status showing `active (running)` | Excludes the identifying prompt and log lines containing the machine name. |
 
-The original lab record contains screenshots of the VM addresses, successful ping, initial Nmap scan, OpenSSH installation and running SSH service. The most useful existing captures to add are the ping result, initial scan and running-service status, after reviewing and redacting identifying details.
+Only cropping was applied. No terminal text was generated, replaced or reconstructed. The lab IP addresses remain visible to connect the evidence to the documented setup.
 
-The scan with SSH open and the final verification were confirmed in messages but have no attached screenshots in that record. The suggestions below do not imply those captures already exist.
+## Evidence limits
 
-## Recommended evidence
+The Nmap scan with SSH open and the final scan after stopping and disabling SSH were confirmed in messages, but no screenshots of those checks were attached to the original lab record. These images do not claim to show those later results.
 
-If available, prioritise these three captures:
-
-1. **Initial Nmap scan:** Ubuntu reachable, with all 1,000 default TCP ports closed.
-2. **Nmap scan with SSH running:** TCP port 22 open and identified as SSH/OpenSSH.
-3. **Final Nmap scan:** port 22 no longer open after stopping and disabling SSH.
-
-Useful supporting captures are the successful four-packet ping and Ubuntu's SSH service status while running and after stopping it.
-
-Before adding any screenshot, review and crop or redact passwords, credentials, personal information, usernames, unrelated windows and host-machine details. Keep the relevant command and result readable, and disclose any redaction in its caption. The private lab IP addresses can remain to connect the evidence to the documentation.
-
-Only add genuine evidence. If a screenshot comes from a later repeat of the lab, label it with the actual capture date and explain that it is a repeat. Do not present it as evidence from the original session.
+If evidence from a later repeat is added, label it with the actual capture date and identify it as a repeat.

@@ -100,10 +100,34 @@ These are summaries of my recorded observations, not full terminal transcripts.
 
 The main lesson was to make a controlled change and independently verify the result from another machine.
 
+## Screenshots
+
+These are cropped copies of original screenshots from the lab completed on 5 September 2026. Cropping excludes identifying details and unrelated terminal content; the visible command output has not been rewritten.
+
+### Connectivity from Kali
+
+![Ping from Kali to Ubuntu showing four packets received and zero packet loss](screenshots/01-connectivity-ping.png)
+
+The ping result confirms Ubuntu was reachable at `192.168.56.101`.
+
+### Initial Nmap scan
+
+![Initial Nmap scan showing Ubuntu up and all 1000 scanned TCP ports closed](screenshots/02-initial-nmap-scan.png)
+
+Before installing the SSH server, all 1,000 default TCP ports scanned were closed.
+
+### SSH service running on Ubuntu
+
+![Ubuntu SSH service status showing active and running](screenshots/03-ssh-service-running.png)
+
+After installation, the local status check showed the SSH service was active and running. This capture documents service status; the later Nmap checks were confirmed in my messages without attached screenshots.
+
+See [the screenshot notes](screenshots/README.md) for provenance and evidence limits.
+
 ## Limitations / scope
 
 - This was a Linux/networking self-study lab focused on connectivity, service management, scanning and verification. It was not penetration testing or a cybersecurity vulnerability assessment, and no exploitation was performed.
 - Scans targeted only the Ubuntu VM's host-only address. The default scan covered 1,000 TCP ports, not every TCP port or UDP ports.
 - Service detection identified SSH/OpenSSH; no exact version is recorded here, and no vulnerability conclusion is drawn from that identification.
 - The final scan established that port 22 was no longer open at that time. No reboot verification or SSH login test is documented.
-- No screenshots or raw scan logs are currently included. See [the screenshot notes](screenshots/README.md) for suggested evidence to add if available.
+- Three original screenshot crops are included. No standalone raw scan logs, screenshot of the later open-port scan, or screenshot of the final scan are available in the original lab record; those later results are based on my recorded confirmations.
